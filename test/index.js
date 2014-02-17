@@ -64,4 +64,16 @@ describe("Async JSON body parser", function() {
             .expect(expectPayload(payload))
             .end(done);
     });
+
+    it.skip("should fail on invalid JSON", function(done) {
+        request(server)
+            .post('/')
+            .set('Content-Type', 'application/json')
+            .send('{"name":"tj')
+            .expect(400)
+            .expect(function(res) {
+                res.body.message.should.include('Invalid JSON');
+            })
+            .end(done);
+    });
 });
