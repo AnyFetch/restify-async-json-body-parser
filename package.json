@@ -1,7 +1,7 @@
 {
   "name": "restify-async-json-body-parser",
   "description": "Asynchronously read JSON request body for restify.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Matthieu Bacconnier <matthieu@papiel.fr>",
   "scripts": {
     "test": "NODE_ENV=test mocha -R spec"
