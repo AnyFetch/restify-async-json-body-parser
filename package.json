@@ -6,7 +6,7 @@
   "scripts": {
     "test": "NODE_ENV=test mocha -R spec"
   },
-  "main": "./lib/",
+  "main": "./lib/async_json_body_parser.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Papiel/restify-async-json-body-parser"
