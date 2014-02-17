@@ -3,7 +3,7 @@
 require("should");
 
 var restify = require('restify');
-var asyncJsonBodyParser = require('../lib/async_json_body_parser');
+var asyncJsonBodyParser = require('../lib/async_json_body_parser.js');
 
 var request = require('supertest');
 
@@ -15,7 +15,7 @@ function expectPayload(payload) {
 
 describe("Async JSON body parser", function() {
     var server = restify.createServer();
-    server.use(asyncJsonBodyParser());
+    server.use(asyncJsonBodyParser);
     server.post('/', function(req, res, next) {
         res.send(req.params);
         next();
