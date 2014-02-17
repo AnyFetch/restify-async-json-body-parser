@@ -18,10 +18,6 @@
   "dependencies": {
     "restify": "2.6.x",
     "async": "0.2.x",
-    "qs": "0.6.5",
-    "formidable": "1.0.14",
-    "csv": "0.3.6",
-    "assert-plus": "0.1.4",
     "JSONStream": "~0.8.0"
   },
   "devDependencies": {
