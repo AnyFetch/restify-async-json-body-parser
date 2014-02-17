@@ -15,14 +15,13 @@ function expectPayload(payload) {
 
 describe("Async JSON body parser", function() {
     var server = restify.createServer();
-    server.use(restify.bodyParser());
+    server.use(asyncJsonBodyParser());
     server.post('/', function(req, res, next) {
         res.send(req.params);
         next();
     });
 
     it("should handle application/x-www-form-urlencoded requests", function(done) {
-        var payload = {};
         request(server)
             .post('/')
             .send("something=foo")
