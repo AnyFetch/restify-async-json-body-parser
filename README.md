@@ -9,6 +9,9 @@ When using `server.use(restify.bodyParser()`, content is buffered being passed t
 With very large JSON, this quickly becomes a bottleneck, hanging restify thread while parsing JSON.
 
 This library parses JSON asynchronously to avoid blocking the main event loop.
+All other requests are left unchanged.
+
+Request below a certain size are also sent to the default `bodyParser` for performance.
 
 ## Usage
 
