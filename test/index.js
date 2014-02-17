@@ -9,13 +9,17 @@ var request = require('supertest');
 
 function expectPayload(payload) {
     return function(res) {
+        if(res.statusCode !== 200) {
+            throw JSON.stringify(res.body);
+        }
+
         res.body.should.eql(payload);
     };
 }
 
 describe("Async JSON body parser", function() {
     var server = restify.createServer();
-    server.use(asyncJsonBodyParser);
+    server.use(asyncJsonBodyParser());
     server.post('/', function(req, res, next) {
         res.send(req.params);
         next();
@@ -26,7 +30,6 @@ describe("Async JSON body parser", function() {
             .post('/')
             .send("something=foo")
             .send("somethingelse=base")
-            .expect(200)
             .expect(expectPayload({
                 something: "foo",
                 somethingelse: "base"
@@ -35,11 +38,14 @@ describe("Async JSON body parser", function() {
     });
 
     it("should handle simple application/json requests", function(done) {
-        var payload = {};
+        var payload = {
+            'something': 'foo',
+            'yup': 'bar'
+        };
+
         request(server)
             .post('/')
             .send(payload)
-            .expect(200)
             .expect(expectPayload(payload))
             .end(done);
     });
@@ -55,7 +61,6 @@ describe("Async JSON body parser", function() {
         request(server)
             .post('/')
             .send(payload)
-            .expect(200)
             .expect(expectPayload(payload))
             .end(done);
     });

@@ -10,5 +10,7 @@ This library parses JSON asynchronously to avoid blocking the main event loop.
 ## Usage
 
 ```javascript
-server.use(require('restify-async-json-body-parser'));
+var restifyAsyncJsonBodyParser = require('restify-async-json-body-parser');
+
+server.use(restifyAsyncJsonBodyParser());
 ```
