@@ -21,7 +21,21 @@ describe("Async JSON body parser", function() {
         next();
     });
 
-    it("should handle simple JSON requests", function(done) {
+    it("should handle application/x-www-form-urlencoded requests", function(done) {
+        var payload = {};
+        request(server)
+            .post('/')
+            .send("something=foo")
+            .send("somethingelse=base")
+            .expect(200)
+            .expect(expectPayload({
+                something: "foo",
+                somethingelse: "base"
+            }))
+            .end(done);
+    });
+
+    it("should handle simple application/json requests", function(done) {
         var payload = {};
         request(server)
             .post('/')
@@ -31,7 +45,7 @@ describe("Async JSON body parser", function() {
             .end(done);
     });
 
-    it("should handle long JSON requests", function(done) {
+    it("should handle long application/json requests", function(done) {
         var payload = {};
         var arbitraryContent = require('fs').readFileSync(__filename).toString();
 
